@@ -1,0 +1,31 @@
+﻿﻿
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <table border="1" style="width: 1024px; height: 768px;">
+        <tr>
+            <td colspan="2" style="text-align: center; height:100px;">
+                <h3>Header Bölümü</h3>
+            </td>
+        </tr>
+        <tr>
+            <td style="width:150px">
+                <h3>Sol Menü</h3>
+            </td>
+            <td style="width: 600px">
+                @RenderBody()
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center; font-size:x-small; height: 60px;">
+            </td>
+            <h3>Footer Bölümü</h3>
+        </tr>
+    </table>
+</body>
+</html>
