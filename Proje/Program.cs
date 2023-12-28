@@ -1,4 +1,8 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using Proje.Data;
 
 using Proje.Data;
 
@@ -30,6 +34,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication(); // Identity'nin Authentication middleware'ini ekledim.
 app.UseAuthorization();
 
 app.MapControllerRoute(
