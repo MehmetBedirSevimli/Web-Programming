@@ -1,0 +1,31 @@
+﻿@model Doktor
+
+<h2>Doktoru Düzenle</h2>
+
+<form asp-action="Edit">
+    <input type="hidden" asp-for="DoktorId" />
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="Adi"></label>
+        <input asp-for="Adi" class="form-control" />
+        <span asp-validation-for="Adi" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Soyadi"></label>
+        <input asp-for="Soyadi" class="form-control" />
+        <span asp-validation-for="Soyadi" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PoliklinikId"></label>
+        <select asp-for="PoliklinikId" asp-items="@(new SelectList(ViewBag.Poliklinikler, "PoliklinikId", "Adi"))" class="form-control"></select>
+        <span asp-validation-for="PoliklinikId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Güncelle" class="btn btn-primary" />
+    </div>
+</form>

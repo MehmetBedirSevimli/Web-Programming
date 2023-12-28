@@ -9,5 +9,6 @@
         public string Durum { get; set; }
         public Kullanici Kullanici { get; set; }
         public Doktor Doktor { get; set; }
+
     }
 }

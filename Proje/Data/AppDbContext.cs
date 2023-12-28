@@ -15,5 +15,7 @@ namespace Proje.Data
         public DbSet<Doktor> Doktorlar { get; set; }
         public DbSet<Kullanici> Kullanicilar { get; set; }
         public DbSet<Randevu> Randevular { get; set; }
+
+        public DbSet<WorkingHours> WorkingHours { get; set; }
     }
 }

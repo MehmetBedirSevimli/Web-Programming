@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Proje.Data;
 using Proje.Data; // ApplicationUser sınıfının bulunduğu namespace
-using Proje.Models.ViewModels; // Gerekirse ViewModel kullanabilirsiniz
+using Proje.Models.ViewModels.Account; // Gerekirse ViewModel kullanabilirsiniz
 
 /*Register ve Login işlemleri için iki ayrı action metodunu içeren
   bir AccountController sınıfı bulunmaktadır. Bu action metodları, ilgili sayfalara yönlendirme yapar. 
