@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Proje.Controllers
 {
-    public class DoctorsController : Controller
+    public class DoktorController : Controller
     {
         private readonly AppDbContext _context;
 
-        public DoctorsController(AppDbContext context)
+        public DoktorController(AppDbContext context)
         {
             _context = context;
         }

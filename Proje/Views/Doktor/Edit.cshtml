@@ -1,8 +1,11 @@
 ﻿@model Doktor
 
-<h2>Yeni Doktor Ekle</h2>
+<h2>Doktoru Düzenle</h2>
 
-<form asp-action="Create">
+<form asp-controller="Doktor" asp-action="Edit">
+
+    <input type="hidden" asp-for="DoktorId" />
+
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <div class="form-group">
@@ -24,6 +27,6 @@
     </div>
 
     <div class="form-group">
-        <input type="submit" value="Kaydet" class="btn btn-primary" />
+        <input type="submit" value="Güncelle" class="btn btn-primary" />
     </div>
 </form>
