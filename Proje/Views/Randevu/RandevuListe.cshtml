@@ -1,0 +1,38 @@
+﻿@model List<Proje.Models.Randevu>
+
+<h2>Randevu Listesi</h2>
+
+@if (Model.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Tarih</th>
+                <th>Poliklinik</th>
+                <th>Doktor</th>
+                <th>Durum</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var randevu in Model)
+            {
+                <tr>
+                    <td>@randevu.Tarih.ToShortDateString()</td>
+                    <td>@randevu.Doktor.Poliklinik.Adi</td>
+                    <td>@randevu.Doktor.Adi</td>
+                    <td>@randevu.Durum</td>
+                    <td>
+                        <form asp-action="RandevuIptal" asp-route-id="@randevu.RandevuId" method="post">
+                            <input type="submit" value="Randevu İptal" class="btn btn-danger" onclick="return confirm('Randevuyu iptal etmek istediğinize emin misiniz?')" />
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Randevu bulunamadı.</p>
+}
