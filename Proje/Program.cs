@@ -21,6 +21,27 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// Identity servislerini ekleyin.
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+{
+    // Kullanýcý þifre ayarlarý
+    options.Password.RequireDigit = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireUppercase = true;
+    options.Password.RequireNonAlphanumeric = true;
+    options.Password.RequiredLength = 6;
+
+    // Kullanýcý kilitleme ayarlarý
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+    options.Lockout.MaxFailedAccessAttempts = 5;
+    options.Lockout.AllowedForNewUsers = true;
+
+    // Kullanýcý ayarlarý
+    options.User.RequireUniqueEmail = true;
+})
+    .AddEntityFrameworkStores<AppDbContext>() // Identity için DbContext'i belirtin
+    .AddDefaultTokenProviders();
+
 var app = builder.Build();
 
 
