@@ -14,4 +14,4 @@ namespace Proje.Data
         //public ICollection<SomeEntity> SomeEntities { get; set; }
     }
 }
-//deeneme
+//deneme
