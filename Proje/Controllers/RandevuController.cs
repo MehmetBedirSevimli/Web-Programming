@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Proje.Data;
 using Proje.Models;
@@ -12,6 +13,12 @@ namespace Proje.Controllers
      * RandevuController sınıfının temel CRUD (Create, Read, Update, Delete) işlemlerini içermektedir. 
      * Ayrıca, Create aksiyonunda kullanıcıları ve doktorları 
      * dropdown listelerle göndermek için ViewBag kullanılmıştır.
+     * */
+
+    [Authorize] // Sadece giriş yapmış kullanıcılara izin verir
+    /*Bu şekilde, RandevuController içindeki her aksiyon için giriş yapmış olma kontrolü yapılır. 
+     * Eğer kullanıcı giriş yapmamışsa, sistem 
+     * otomatik olarak giriş sayfasına yönlendirilir.
      * */
     public class RandevuController : Controller
     {
@@ -28,6 +35,7 @@ namespace Proje.Controllers
             var randevular = await _context.Randevular
                 .Include(r => r.Kullanici)
                 .Include(r => r.Doktor)
+                .Include(r => r.Poliklinik) // Poliklinik eklenmiştir
                 .ToListAsync();
 
             return View(randevular);
@@ -39,6 +47,7 @@ namespace Proje.Controllers
             // Gerekirse kullanıcıları ve doktorları dropdown listelerle gönderme
             ViewBag.KullaniciList = _context.Kullanicilar.ToList();
             ViewBag.DoktorList = _context.Doktorlar.ToList();
+            ViewBag.PoliklinikList = _context.Poliklinikler.ToList();
 
             return View();
         }
@@ -50,7 +59,7 @@ namespace Proje.Controllers
          * bu da sayfaya sadece sunucu tarafından oluşturulan formların 
          * gönderilebileceği anlamına gelir.
          * */
-        public async Task<IActionResult> Create([Bind("RandevuId,KullaniciId,DoktorId,Tarih,Durum")] Randevu randevu)
+    public async Task<IActionResult> Create([Bind("RandevuId,KullaniciId,DoktorId,Tarih,Durum")] Randevu randevu)
         {
             if (ModelState.IsValid)
             {
@@ -74,9 +83,10 @@ namespace Proje.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            // Gerekirse kullanıcıları ve doktorları dropdown listelerle gönderme
+            // Gerekirse kullanıcıları, doktorları ve poliklinikleri dropdown listelerle gönderme
             ViewBag.KullaniciList = _context.Kullanicilar.ToList();
             ViewBag.DoktorList = _context.Doktorlar.ToList();
+            ViewBag.PoliklinikList = _context.Poliklinikler.ToList();
 
             return View(randevu);
         }
@@ -92,6 +102,7 @@ namespace Proje.Controllers
             var randevu = await _context.Randevular
                 .Include(r => r.Kullanici)
                 .Include(r => r.Doktor)
+                .Include(r => r.Poliklinik) // Poliklinik eklenmiştir
                 .FirstOrDefaultAsync(m => m.RandevuId == id);
 
             if (randevu == null)
@@ -108,6 +119,7 @@ namespace Proje.Controllers
             // Gerekirse klinik ve doktor verilerini view'a gönderme
             ViewBag.Klinikler = _context.Poliklinikler.ToList();
             ViewBag.Doktorlar = _context.Doktorlar.ToList();
+
 
             return View();
         }

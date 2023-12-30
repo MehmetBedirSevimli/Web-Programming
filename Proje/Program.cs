@@ -5,7 +5,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Proje.Data;
 using Microsoft.AspNetCore.Identity;
-
+using Proje.Models;
+using Microsoft.Extensions.Options;
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -16,23 +17,13 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     // veya baþka bir veritabaný saðlayýcýsý kullanýlýyorsa ona göre belirtin.
 });
 
-/*
- *  builder.Services.AddIdentity<ApplicationUser, IdentityRole>() ile 
- *  Identity servislerini ekledik. Ayrýca, builder.Services.AddEntityFrameworkStores<AppDbContext>() ile
- *  kullanýcý ve rol verilerini veritabanýnda saklamak için Entity Framework kullanýlacaðýný belirttik.
-
-Not: AddIdentity metodunun ilk parametresi kullanýcý sýnýfýnýz (ApplicationUser), 
-ikinci parametresi ise rol sýnýfýnýz (IdentityRole) olmalýdýr. Eðer özel bir rol sýnýfýnýz yoksa, 
-IdentityRole kullanabilirsiniz.
-*/
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-    .AddEntityFrameworkStores<AppDbContext>()
-    .AddDefaultTokenProviders();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
