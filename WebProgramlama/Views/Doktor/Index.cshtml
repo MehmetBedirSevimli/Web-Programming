@@ -1,0 +1,27 @@
+﻿@model IEnumerable<WebProgramlama.Models.Doktor>
+
+<h2>Doktor List</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Adı</th>
+            <!-- Diğer sütun başlıkları -->
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var doktor in Model)
+        {
+            <tr>
+                <td>@doktor.Adi</td>
+                <!-- Diğer sütunlar -->
+                <td>
+                    <a asp-action="Details" asp-route-id="@doktor.Id">Details</a> |
+                    <a asp-action="Edit" asp-route-id="@doktor.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@doktor.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

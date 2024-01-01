@@ -23,6 +23,8 @@
         public Poliklinik Poliklinik { get; set; }
 
         public ICollection<Randevu> Randevular { get; set; }
+        public ICollection<CalismaSaatleri> CalismaSaatleri { get; set; }
+
     }
 
 }

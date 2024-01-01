@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebProgramlama.Data;
+using WebProgramlama.Data.Repositories;
 using WebProgramlama.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,7 +30,11 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 
 
 // IAuthService servisini kaydet
-builder.Services.AddSingleton<IAuthService, AuthService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IDoktorRepository, DoktorRepository>();
+builder.Services.AddScoped<IDoktorService, DoktorService>();
+builder.Services.AddScoped<ICalismaSaatleriRepository, CalismaSaatleriRepository>();
+builder.Services.AddScoped<ICalismaSaatleriService, CalismaSaatleriService>();
 
 
 var app = builder.Build();

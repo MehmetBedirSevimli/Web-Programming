@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WebProgramlama.Data;
@@ -11,9 +12,10 @@ using WebProgramlama.Data;
 namespace WebProgramlama.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240101161905_3")]
+    partial class _3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -239,34 +241,6 @@ namespace WebProgramlama.Migrations
                     b.ToTable("AnaBilimDallari");
                 });
 
-            modelBuilder.Entity("WebProgramlama.Models.CalismaSaatleri", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<TimeSpan>("BaslangicSaati")
-                        .HasColumnType("interval");
-
-                    b.Property<TimeSpan>("BitisSaati")
-                        .HasColumnType("interval");
-
-                    b.Property<int>("DoktorId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Gun")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DoktorId");
-
-                    b.ToTable("CalismaSaatleri");
-                });
-
             modelBuilder.Entity("WebProgramlama.Models.Doktor", b =>
                 {
                     b.Property<int>("Id")
@@ -448,15 +422,6 @@ namespace WebProgramlama.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WebProgramlama.Models.CalismaSaatleri", b =>
-                {
-                    b.HasOne("WebProgramlama.Models.Doktor", null)
-                        .WithMany("CalismaSaatleri")
-                        .HasForeignKey("DoktorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("WebProgramlama.Models.Doktor", b =>
                 {
                     b.HasOne("WebProgramlama.Models.Poliklinik", "Poliklinik")
@@ -505,8 +470,6 @@ namespace WebProgramlama.Migrations
 
             modelBuilder.Entity("WebProgramlama.Models.Doktor", b =>
                 {
-                    b.Navigation("CalismaSaatleri");
-
                     b.Navigation("Randevular");
                 });
 
