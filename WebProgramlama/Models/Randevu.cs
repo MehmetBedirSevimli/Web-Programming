@@ -14,7 +14,7 @@
         public int DoktorId { get; set; }
         public Doktor Doktor { get; set; }
 
-        //public int KullaniciId { get; set; }
+        public int UserId { get; set; }
         public Kullanici Kullanici { get; set; }
     }
 

@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebProgramlama.Data;
+using WebProgramlama.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,24 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+{
+    // Þifre kodlama seçeneklerini ayarlayýn
+    options.Password.RequireDigit = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireNonAlphanumeric = true;
+    options.Password.RequireUppercase = true;
+    options.Password.RequiredLength = 6;
+    options.Password.RequiredUniqueChars = 1;
+})
+.AddEntityFrameworkStores<AppDbContext>();
+
+
+
+// IAuthService servisini kaydet
+builder.Services.AddSingleton<IAuthService, AuthService>();
 
 
 var app = builder.Build();
